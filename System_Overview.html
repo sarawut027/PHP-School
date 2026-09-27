@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุประบบแจ้งซ่อมภายในโรงเรียน</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #ec4899;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .poster-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--surface);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 50px 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-family: 'Outfit', 'Sarabun', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Grid Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        @media(min-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* Section Styles */
+        .section-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 10px;
+        }
+
+        /* Lists */
+        ul.styled-list {
+            list-style: none;
+        }
+
+        ul.styled-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        ul.styled-list li::before {
+            content: '👉';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 0.9em;
+        }
+
+        /* Roles Tags */
+        .role-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .tag-admin { background: #fee2e2; color: #991b1b; }
+        .tag-teacher { background: #e0e7ff; color: #3730a3; }
+        .tag-tech { background: #dcfce7; color: #166534; }
+
+        /* Workflow */
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .step {
+            background: var(--bg);
+            border: 1px solid var(--primary-light);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .arrow {
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        /* Mockup Form */
+        .mockup-container {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .req {
+            color: var(--danger);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            background: white;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .upload-box {
+            border: 2px dashed var(--primary-light);
+            background: #eef2ff;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .upload-box:hover {
+            background: #e0e7ff;
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .diagram-container {
+            overflow-x: auto;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+    <div class="header">
+        <h1>🔧 ระบบแจ้งซ่อมภายในโรงเรียน (School Repair System)</h1>
+        <p>ภาพรวมการทำงาน (Overview) • Class Diagram (อิงตาม Database Schema อย่างละเอียด) • แบบร่างหน้าจอ (UI Mockup)</p>
+    </div>
+
+    <div class="content-grid">
+        
+        <!-- 1. System Info -->
+        <div class="section-card">
+            <h2 class="section-title">📋 1. ข้อมูลระบบ (System Info)</h2>
+            <p><strong>ผู้ใช้งาน (User Roles)</strong></p>
+            <div style="margin-bottom: 15px;">
+                <span class="role-tag tag-admin">Admin (ผู้ดูแล)</span>
+                <span class="role-tag tag-teacher">Teacher (ครู/บุคลากร)</span>
+                <span class="role-tag tag-tech">Technician (ช่างซ่อม)</span>
+            </div>
+            
+            <p><strong>ฟีเจอร์หลัก (Key Features)</strong></p>
+            <ul class="styled-list">
+                <li>แจ้งซ่อม (ระบุปัญหา, อาคาร, ห้อง)</li>
+                <li><strong>บังคับแนบรูปถ่ายเสมอ</strong> (ภาพก่อนซ่อม) เพื่อหลักฐานที่ชัดเจน</li>
+                <li>มอบหมายงาน (Assign) และกำหนดวันเสร็จสิ้น (Due Date)</li>
+                <li>ติดตามสถานะ (Pending -> Accepted -> In Progress -> Completed)</li>
+                <li>บันทึกความคิดเห็น (Comments) เพิ่มเติมในใบแจ้งซ่อมได้</li>
+            </ul>
+
+            <p style="margin-top:15px;"><strong>สถานะการทำงาน (Workflow)</strong></p>
+            <div class="workflow">
+                <div class="step">รอรับเรื่อง<br><small>(Pending)</small></div>
+                <div class="arrow">→</div>
+                <div class="step">รับเรื่องแล้ว<br><small>(Accepted)</small></div>
+                <div class="arrow">→</div>
+                <div class="step">กำลังดำเนินการ<br><small>(In Progress)</small></div>
+                <div class="arrow">→</div>
+                <div class="step" style="background:#dcfce7; color:#166534; border-color:#86efac;">ซ่อมเสร็จ<br><small>(Completed)</small></div>
+            </div>
+        </div>
+
+        <!-- 2. UI Mockup -->
+        <div class="section-card">
+            <h2 class="section-title">🖥️ 2. แบบร่างหน้าจอ (UI Mockup)</h2>
+            <div class="mockup-container">
+                <h3 style="margin-bottom: 15px; border-bottom: 1px solid #cbd5e1; padding-bottom: 10px;">แบบฟอร์มแจ้งซ่อมใหม่ (New Repair Request)</h3>
+                
+                <div class="form-group">
+                    <label>อาคาร (Building) <span class="req">*</span></label>
+                    <input type="text" class="form-control" placeholder="ระบุอาคาร...">
+                </div>
+
+                <div class="form-group">
+                    <label>ห้อง (Room) <span class="req">*</span></label>
+                    <input type="text" class="form-control" placeholder="ระบุห้อง...">
+                </div>
+
+                <div class="form-group">
+                    <label>ประเภทปัญหา (Problem Type) <span class="req">*</span></label>
+                    <select class="form-control">
+                        <option value="">เลือกประเภทปัญหา...</option>
+                        <option value="electrical">ไฟฟ้า (Electrical)</option>
+                        <option value="furniture">เฟอร์นิเจอร์ (Furniture)</option>
+                        <option value="computer">คอมพิวเตอร์ (Computer)</option>
+                        <option value="aircon">เครื่องปรับอากาศ (Aircon)</option>
+                        <option value="other">อื่นๆ (Other)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>รายละเอียดปัญหา (Description) <span class="req">*</span></label>
+                    <textarea class="form-control" rows="2" placeholder="อธิบายรายละเอียดปัญหา..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>ความเร่งด่วน (Urgency) <span class="req">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="urgency" value="low"> ทั่วไป (Low)</label>
+                        <label><input type="radio" name="urgency" value="medium" checked> ปานกลาง (Medium)</label>
+                        <label><input type="radio" name="urgency" value="high"> ด่วนมาก (High)</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>แนบรูปภาพก่อนซ่อม (Repair Images - Before) <span class="req" style="font-size: 1.1em;">(บังคับแนบ *)</span></label>
+                    <div class="upload-box">
+                        📸 คลิกที่นี่ หรือ ลากไฟล์รูปภาพมาวาง<br>
+                        <small style="color:var(--text-muted); font-weight:normal;">(รองรับ .jpg, .png ขนาดไม่เกิน 5MB)</small>
+                    </div>
+                </div>
+
+                <button class="btn-submit">ส่งใบแจ้งซ่อม</button>
+            </div>
+        </div>
+
+        <!-- 3. Class Diagram -->
+        <div class="section-card full-width">
+            <h2 class="section-title">📊 3. UML Class Diagram (อ้างอิงตาม Database Schema ทั้งหมด)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    classDiagram
+                        class User {
+                            -int id
+                            -string username
+                            -string password
+                            -string fullname
+                            -string role
+                            -string email
+                            -DateTime created_at
+                            +login()
+                            +logout()
+                            +updateProfile()
+                        }
+                    
+                        class RepairRequest {
+                            -int id
+                            -string request_no
+                            -int user_id
+                            -string building
+                            -string room
+                            -string problem_type
+                            -string description
+                            -string urgency
+                            -string status
+                            -int assigned_to
+                            -DateTime due_date
+                            -DateTime completion_date
+                            -float cost
+                            -string result
+                            -DateTime created_at
+                            +assignTo(technicianId, dueDate)
+                            +startRepair()
+                            +completeRepair(cost, result)
+                            +addComment(comment)
+                            +updateStatus(newStatus)
+                        }
+                    
+                        class RepairImage {
+                            -int id
+                            -int repair_id
+                            -string image_type
+                            -string image_path
+                            -DateTime uploaded_at
+                            +upload()
+                            +delete()
+                        }
+                    
+                        class Comment {
+                            -int id
+                            -int repair_id
+                            -int user_id
+                            -string comment
+                            -DateTime created_at
+                            +addComment()
+                            +editComment()
+                        }
+                    
+                        User "1" -- "*" RepairRequest : creates
+                        User "1" -- "*" RepairRequest : assigned to (technician)
+                        RepairRequest "1" -- "1..*" RepairImage : MUST HAVE (before/after)
+                        RepairRequest "1" -- "*" Comment : contains
+                        User "1" -- "*" Comment : writes
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ER Diagram -->
+        <div class="section-card full-width">
+            <h2 class="section-title">🗄️ 4. Entity Relationship Diagram (ERD - Database)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    erDiagram
+                        users ||--o{ repair_requests : "creates (1:N)"
+                        users ||--o{ repair_requests : "assigned to (1:N)"
+                        users ||--o{ comments : "writes (1:N)"
+                        repair_requests ||--o{ repair_images : "has (1:N)"
+                        repair_requests ||--o{ comments : "contains (1:N)"
+
+                        users {
+                            int id PK
+                            varchar username
+                            varchar password
+                            varchar fullname
+                            enum role
+                            varchar email
+                            timestamp created_at
+                        }
+                        repair_requests {
+                            int id PK
+                            varchar request_no
+                            int user_id FK
+                            varchar building
+                            varchar room
+                            enum problem_type
+                            text description
+                            enum urgency
+                            enum status
+                            int assigned_to FK
+                            date due_date
+                            date completion_date
+                            decimal cost
+                            text result
+                            timestamp created_at
+                        }
+                        repair_images {
+                            int id PK
+                            int repair_id FK
+                            enum image_type
+                            varchar image_path
+                            timestamp uploaded_at
+                        }
+                        comments {
+                            int id PK
+                            int repair_id FK
+                            int user_id FK
+                            text comment
+                            timestamp created_at
+                        }
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. State Diagram -->
+        <div class="section-card full-width">
+            <h2 class="section-title">🔄 5. State Transition Diagram (สถานะการซ่อม)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    stateDiagram-v2
+                        [*] --> pending : Submit Request
+                        pending --> accepted : assignTo()
+                        accepted --> in_progress : startRepair()
+                        in_progress --> completed : completeRepair()
+                        completed --> [*]
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Use Case Diagram -->
+        <div class="section-card full-width">
+            <h2 class="section-title">👤 6. Use Case Diagram (การโต้ตอบของผู้ใช้กับระบบ)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    flowchart LR
+                        %% Actors
+                        Admin([Admin<br>ผู้ดูแลระบบ])
+                        Teacher([Teacher<br>ครู/บุคลากร])
+                        Tech([Technician<br>ช่างซ่อม])
+
+                        %% Use Cases
+                        UC_Login((เข้าสู่ระบบ / ดู Dashboard))
+                        UC_ManageUser((จัดการข้อมูลผู้ใช้))
+                        UC_ManageAll((จัดการใบแจ้งซ่อมทั้งหมด))
+                        UC_Assign((มอบหมายงานให้ช่าง))
+                        
+                        UC_NewReq((สร้างใบแจ้งซ่อมใหม่<br>และแนบรูป))
+                        UC_TrackReq((ติดตามสถานะ<br>งานของตนเอง))
+                        
+                        UC_ViewAssigned((ดูงานที่ได้รับมอบหมาย))
+                        UC_UpdateStatus((อัปเดตสถานะการซ่อม))
+                        UC_Complete((บันทึกผล/ค่าใช้จ่าย))
+                        
+                        UC_Comment((เพิ่มความคิดเห็นในใบแจ้งซ่อม))
+
+                        %% Connections
+                        Admin --> UC_Login
+                        Admin --> UC_ManageUser
+                        Admin --> UC_ManageAll
+                        Admin --> UC_Assign
+                        Admin --> UC_Comment
+
+                        Teacher --> UC_Login
+                        Teacher --> UC_NewReq
+                        Teacher --> UC_TrackReq
+                        Teacher --> UC_Comment
+
+                        Tech --> UC_Login
+                        Tech --> UC_ViewAssigned
+                        Tech --> UC_UpdateStatus
+                        Tech --> UC_Complete
+                        Tech --> UC_Comment
+                        
+                        classDef default fill:#f8fafc,stroke:#4f46e5,stroke-width:2px;
+                        classDef actor fill:#e0e7ff,stroke:#3730a3,stroke-width:2px,color:#3730a3,font-weight:bold;
+                        class Admin,Teacher,Tech actor;
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
+</body>
+</html>

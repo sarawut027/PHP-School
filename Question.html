@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบงานปฏิบัติการ: ระบบแจ้งซ่อมภายในโรงเรียน</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            color: #7f8c8d;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        
+        .student-info {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .student-info p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .subsection {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .subsection h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .question {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .question-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .answer-space {
+            min-height: 80px;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            margin-top: 10px;
+            padding: 10px;
+            background: #fafafa;
+        }
+        
+        .answer-space.filled {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            padding: 15px 18px;
+            color: #222222;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .answer-space.filled p {
+            margin-bottom: 8px;
+        }
+        
+        .answer-space.filled ul, .answer-space.filled ol {
+            margin: 6px 0 10px 24px;
+        }
+
+        .answer-space.filled li {
+            margin-bottom: 4px;
+        }
+
+        .ans-code {
+            background: #f8fafc;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 13.5px;
+            overflow-x: auto;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        
+        .ans-highlight {
+            color: #0f172a;
+            font-weight: 600;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            background: white;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .feature-list li::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .highlight-box strong {
+            color: #856404;
+        }
+        
+        .database-schema {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .workflow-step {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            text-align: center;
+            flex: 1;
+            margin: 5px;
+            min-width: 120px;
+        }
+        
+        .workflow-arrow {
+            color: #3498db;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* FAQ Styles */
+        .faq-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .faq-q {
+            background: #f1f8ff;
+            padding: 15px 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+        }
+        .faq-a {
+            padding: 15px 20px;
+            color: #555;
+            line-height: 1.8;
+            background: #fcfcfc;
+        }
+        .faq-a ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .faq-a li {
+            margin-bottom: 8px;
+        }
+        .faq-a code {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 ใบงานปฏิบัติการ: ระบบแจ้งซ่อมภายในโรงเรียน</h1>
+            <h2>การวิเคราะห์ออกแบบระบบ (OOAD) และการพัฒนาด้วย PHP 8 + MySQL + SweetAlert2</h2>
+        </div>
+        
+        <div class="student-info">
+            <p><strong>รายวิชา:</strong> การพัฒนาเว็บแอปพลิเคชัน (Web Application Development)</p>
+            <p><strong>ชื่อ-นามสกุล:</strong> นายสราวุฒิ อุยยาหาญ <strong>รหัสนักศึกษา:</strong> 674230027 <strong>กลุ่ม:</strong> 67/44</p>
+            <p><strong>วันที่ส่ง:</strong> 22/9/2569 <strong>คะแนน:</strong> .........../100</p>
+        </div>
+
+        <!-- ส่วนที่ 1 -->
+        <div class="section">
+            <div class="section-title">📋 ส่วนที่ 1: ความต้องการของระบบ (System Requirements)</div>
+            
+            <div class="subsection">
+                <h3>🎯 ปัญหาและแนวทางแก้ไข</h3>
+                <p>ในโรงเรียนมีปัญหาเกี่ยวกับการแจ้งซ่อมอุปกรณ์ต่างๆ เช่น:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>💡 ไฟในห้องเรียนไม่ติด แต่ไม่รู้ว่าใครรับผิดชอบ</li>
+                    <li>❄️ แอร์ไม่เย็น แจ้งไปแล้วแต่ไม่รู้ว่าซ่อมถึงขั้นตอนไหน</li>
+                    <li>🖥️ คอมพิวเตอร์ใช้งานไม่ได้ ไม่มีประวัติการซ่อมย้อนหลัง</li>
+                </ul>
+                <p><strong>ระบบนี้จะช่วย:</strong> รวบรวมงานซ่อมไว้ในที่เดียว ตั้งแต่แจ้งปัญหา มอบหมายเจ้าหน้าที่ ติดตามความคืบหน้า ไปจนถึงบันทึกผลการซ่อม พร้อมประวัติให้ตรวจสอบย้อนหลัง</p>
+            </div>
+
+            <div class="subsection">
+                <h3>✨ ฟังก์ชันหลักของระบบ</h3>
+                <ul class="feature-list">
+                    <li><strong>🔐 ระบบสิทธิ์:</strong> แยกสิทธิ์ผู้ดูแล (Admin), ครู/บุคลากร (Teacher), และเจ้าหน้าที่ซ่อม (Technician)</li>
+                    <li><strong>📝 แจ้งซ่อม:</strong> ระบุอาคาร ห้อง ประเภทปัญหา และความเร่งด่วน</li>
+                    <li><strong>📸 แนบรูปภาพ:</strong> ภาพก่อน-หลังซ่อม เพื่อเห็นรายละเอียดชัดเจน</li>
+                    <li><strong>👨‍🔧 มอบหมายงาน:</strong> กำหนดผู้รับผิดชอบ พร้อมวันเสร็จที่กำหนด</li>
+                    <li><strong>💬 แสดงความคิดเห็น:</strong> เพิ่มข้อความสอบถามและข้อมูลประกอบในใบแจ้งซ่อม</li>
+                    <li><strong>💰 บันทึกค่าใช้จ่าย:</strong> บันทึกผลการแก้ไขและค่าใช้จ่ายในการซ่อม</li>
+                    <li><strong>📊 Dashboard:</strong> สรุปงาน พร้อมค้นหา กรองข้อมูล และส่งออก CSV</li>
+                    <li><strong>🖨️ พิมพ์/PDF:</strong> พิมพ์ใบแจ้งซ่อม A4 หรือบันทึกเป็น PDF</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>📌 ขั้นตอนการทำงาน (Workflow)</h3>
+                <div class="workflow">
+                    <div class="workflow-step">📥 รอรับเรื่อง</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">✓ รับเรื่องแล้ว</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">🔧 กำลังดำเนินการ</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">✅ ซ่อมเสร็จ</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 1.1</span>
+                <p><strong>จงระบุ User Roles ทั้ง 3 ประเภท</strong> และอธิบายสิทธิ์การเข้าถึงข้อมูลของแต่ละบทบาท</p>
+                <div class="answer-space filled">
+                    <p>ระบบแจ้งซ่อมแบ่งบทบาทผู้ใช้งาน (User Roles) ออกเป็น 3 บทบาทหลัก ดังนี้:</p>
+                    <ol>
+                        <li><strong class="ans-highlight">ผู้ดูแลระบบ (Admin):</strong>
+                            <ul>
+                                <li>มีสิทธิ์สูงสุดในการเข้าถึงและจัดการข้อมูลทั้งหมดในระบบ</li>
+                                <li>จัดการบัญชีผู้ใช้งาน (เพิ่ม, แก้ไข, ลบข้อมูลผู้ใช้)</li>
+                                <li>ดูรายการใบแจ้งซ่อมทั้งหมด มอบหมายงานให้ช่างซ่อม (Assign) พร้อมระบุวันกำหนดแล้วเสร็จ (Due Date)</li>
+                                <li>เข้าถึง Dashboard ดูสถิติภาพรวม ส่งออกข้อมูลรายงานเป็นไฟล์ CSV และสั่งพิมพ์เอกสารได้</li>
+                            </ul>
+                        </li>
+                        <li><strong class="ans-highlight">ครู / บุคลากร (Teacher):</strong>
+                            <ul>
+                                <li>สร้างใบแจ้งซ่อมใหม่ โดยระบุสถานที่ (อาคาร, ห้อง), ประเภทปัญหา, ความเร่งด่วน และแนบรูปภาพก่อนซ่อม</li>
+                                <li>ดูและติดตามสถานะความคืบหน้าของงานแจ้งซ่อมที่ตนเองหรือผู้อื่นแจ้งไว้</li>
+                                <li>เขียนความคิดเห็น (Comment) หรือสอบถามข้อมูลเพิ่มเติมเกี่ยวกับใบแจ้งซ่อมได้</li>
+                            </ul>
+                        </li>
+                        <li><strong class="ans-highlight">เจ้าหน้าที่ซ่อม / ช่าง (Technician):</strong>
+                            <ul>
+                                <li>ดูรายการงานแจ้งซ่อมที่ตนเองได้รับมอบหมายจาก Admin</li>
+                                <li>อัปเดตสถานะงานซ่อมเมื่อเริ่มลงมือปฏิบัติงาน (เปลี่ยนเป็น "กำลังดำเนินการ / in_progress")</li>
+                                <li>บันทึกผลการซ่อม ระบุค่าใช้จ่ายจริง และอัปโหลดภาพหลังซ่อมเพื่อปิดงาน (เปลี่ยนเป็น "ซ่อมเสร็จ / completed")</li>
+                                <li>ตอบกลับความคิดเห็นในใบแจ้งซ่อมเพื่อประสานงานกับผู้แจ้งได้</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 1.2</span>
+                <p><strong>จงสกัดคำนาม (Noun Extraction)</strong> จากโจทย์ความต้องการด้านบน เพื่อระบุคลาสที่ควรสร้างในระบบ (เช่น RepairRequest, User, Comment) และคำนามที่ไม่ควรสร้างเป็นคลาส พร้อมอธิบายเหตุผล</p>
+                <div class="answer-space filled">
+                    <p><strong>1. คำนามที่ควรสร้างเป็นคลาส (Classes):</strong></p>
+                    <ul>
+                        <li><strong class="ans-highlight">User (ผู้ใช้งาน):</strong> มีข้อมูลเฉพาะตัว (id, username, password, fullname, role) และมีพฤติกรรม (Methods) เช่น login(), logout()</li>
+                        <li><strong class="ans-highlight">RepairRequest (ใบแจ้งซ่อม):</strong> เป็น Entity หลักของระบบที่เก็บข้อมูลปัญหา สถานที่ สถานะ และมี Business Logic เช่น assignTo(), startRepair(), completeRepair()</li>
+                        <li><strong class="ans-highlight">RepairImage (รูปภาพประกอบ):</strong> จัดเก็บข้อมูลรูปถ่าย มีความสัมพันธ์แบบ 1:N กับใบแจ้งซ่อม มีแอตทริบิวต์ระบุรูปก่อน/หลังซ่อม และมีฟังก์ชันจัดการไฟล์อัปโหลด</li>
+                        <li><strong class="ans-highlight">Comment (ความคิดเห็น):</strong> ใช้เก็บบันทึกการติดต่อสื่อสารและหมายเหตุเพิ่มเติม เชื่อมโยงระหว่างผู้ใช้กับใบแจ้งซ่อม</li>
+                    </ul>
+                    <p><strong>2. คำนามที่ไม่ควรสร้างเป็นคลาส พร้อมเหตุผล:</strong></p>
+                    <ul>
+                        <li><strong>อาคาร (Building), ห้อง (Room):</strong> ในขอบเขตของระบบนี้ เป็นเพียงข้อความสั้นๆ ระบุสถานที่ ไม่ได้มีพฤติกรรมหรือความซับซ้อนแยกต่างหาก จึงจัดเก็บเป็น Attribute ภายในคลาส RepairRequest ได้โดยตรง</li>
+                        <li><strong>ประเภทปัญหา (Problem Type), ความเร่งด่วน (Urgency), สถานะ (Status):</strong> เป็นชุดค่าคงที่ (Fixed Value Set) จึงเหมาะที่จะกำหนดเป็นชนิดข้อมูล <code>ENUM</code> หรือ Attribute ภายใน RepairRequest มากกว่าสร้างเป็นคลาสแยก</li>
+                        <li><strong>ค่าใช้จ่าย (Cost), วันกำหนดเสร็จ (Due Date), ผลการซ่อม (Result):</strong> เป็นคุณลักษณะ (Attributes) ของการปิดงานซ่อมใน RepairRequest ไม่ได้มีสถานะเป็น Entity อิสระ</li>
+                        <li><strong>Dashboard, CSV, PDF:</strong> เป็นส่วนของการแสดงผล (Presentation / UI) และรูปแบบไฟล์ส่งออก ไม่ใช่ Information Entity ของระบบ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนที่ 2 -->
+        <div class="section">
+            <div class="section-title">🏗️ ส่วนที่ 2: การออกแบบฐานข้อมูล (Database Design)</div>
+            
+            <div class="subsection">
+                <h3>📊 โครงสร้างฐานข้อมูล (Database Schema)</h3>
+                <div class="database-schema">
+                    <strong>1. users</strong> (ผู้ใช้งานระบบ)<br>
+                    ├─ id (INT, PK)<br>
+                    ├─ username (VARCHAR)<br>
+                    ├─ password (VARCHAR)<br>
+                    ├─ fullname (VARCHAR)<br>
+                    ├─ role (ENUM: 'admin', 'teacher', 'technician')<br>
+                    ├─ email (VARCHAR)<br>
+                    └─ created_at (TIMESTAMP)<br><br>
+
+                    <strong>2. repair_requests</strong> (ใบแจ้งซ่อม)<br>
+                    ├─ id (INT, PK)<br>
+                    ├─ request_no (VARCHAR) - รหัสใบแจ้งซ่อม<br>
+                    ├─ user_id (INT, FK → users)<br>
+                    ├─ building (VARCHAR) - อาคาร<br>
+                    ├─ room (VARCHAR) - ห้อง<br>
+                    ├─ problem_type (ENUM: 'electrical', 'furniture', 'computer', 'aircon', 'other')<br>
+                    ├─ description (TEXT) - รายละเอียดปัญหา<br>
+                    ├─ urgency (ENUM: 'low', 'medium', 'high')<br>
+                    ├─ status (ENUM: 'pending', 'accepted', 'in_progress', 'completed')<br>
+                    ├─ assigned_to (INT, FK → users, NULL)<br>
+                    ├─ due_date (DATE, NULL)<br>
+                    ├─ completion_date (DATE, NULL)<br>
+                    ├─ cost (DECIMAL, NULL)<br>
+                    ├─ result (TEXT, NULL) - ผลการซ่อม<br>
+                    └─ created_at (TIMESTAMP)<br><br>
+
+                    <strong>3. repair_images</strong> (รูปภาพประกอบ)<br>
+                    ├─ id (INT, PK)<br>
+                    ├─ repair_id (INT, FK → repair_requests)<br>
+                    ├─ image_type (ENUM: 'before', 'after')<br>
+                    ├─ image_path (VARCHAR)<br>
+                    └─ uploaded_at (TIMESTAMP)<br><br>
+
+                    <strong>4. comments</strong> (ความคิดเห็น)<br>
+                    ├─ id (INT, PK)<br>
+                    ├─ repair_id (INT, FK → repair_requests)<br>
+                    ├─ user_id (INT, FK → users)<br>
+                    ├─ comment (TEXT)<br>
+                    └─ created_at (TIMESTAMP)
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 2.1</span>
+                <p><strong>จงเขียน SQL CREATE TABLE</strong> สำหรับตาราง <code>repair_requests</code> พร้อมกำหนด Foreign Key Constraints</p>
+                <div class="answer-space filled">
+                    <pre class="ans-code">CREATE TABLE repair_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    request_no VARCHAR(20) NOT NULL UNIQUE,
+    user_id INT NOT NULL,
+    building VARCHAR(100) NOT NULL,
+    room VARCHAR(50) NOT NULL,
+    problem_type ENUM('electrical', 'furniture', 'computer', 'aircon', 'other') NOT NULL,
+    description TEXT NOT NULL,
+    urgency ENUM('low', 'medium', 'high') DEFAULT 'medium',
+    status ENUM('pending', 'accepted', 'in_progress', 'completed') DEFAULT 'pending',
+    assigned_to INT NULL,
+    due_date DATE NULL,
+    completion_date DATE NULL,
+    cost DECIMAL(10, 2) NULL,
+    result TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (assigned_to) REFERENCES users(id) ON DELETE SET NULL
+);</pre>
+                    <p><strong>คำอธิบาย Foreign Key Constraints:</strong></p>
+                    <ul>
+                        <li><code>FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE</code>: ผูกผู้แจ้งเข้ากับตาราง users หากผู้ใช้ถูกลบ ใบแจ้งซ่อมของผู้ใช้นั้นจะถูกลบตามไปด้วยโดยอัตโนมัติ เพื่อป้องกันข้อมูลกำพร้า</li>
+                        <li><code>FOREIGN KEY (assigned_to) REFERENCES users(id) ON DELETE SET NULL</code>: ผูกช่างผู้รับผิดชอบ หากบัญชีช่างซ่อมถูกลบออกจากระบบ ใบแจ้งซ่อมจะยังคงอยู่ แต่ฟิลด์ assigned_to จะถูกปรับค่าเป็น NULL เพื่อให้แอดมินสามารถมอบหมายงานให้ช่างคนอื่นต่อได้</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 2.2</span>
+                <p><strong>จงอธิบายความสัมพันธ์ (Relationships)</strong> ระหว่างตารางต่างๆ พร้อมระบุ Cardinality (1:1, 1:N, M:N) และอธิบายว่าเหตุใดจึงแยกตาราง <code>repair_images</code> ออกจาก <code>repair_requests</code></p>
+                <div class="answer-space filled">
+                    <p><strong>1. ความสัมพันธ์ระหว่างตาราง (Relationships & Cardinality):</strong></p>
+                    <ul>
+                        <li><strong class="ans-highlight">users กับ repair_requests (ผู้แจ้ง):</strong> ความสัมพันธ์แบบ <strong>1:N (One-to-Many)</strong> ผู้ใช้งาน 1 คน สามารถสร้างใบแจ้งซ่อมได้หลายใบ แต่ใบแจ้งซ่อมแต่ละใบสร้างโดยผู้ใช้คนเดียว (ผ่านฟิลด์ <code>user_id</code>)</li>
+                        <li><strong class="ans-highlight">users กับ repair_requests (ช่างผู้รับผิดชอบ):</strong> ความสัมพันธ์แบบ <strong>1:N (One-to-Many)</strong> ช่าง 1 คน สามารถรับผิดชอบงานซ่อมได้หลายงาน แต่ใบแจ้งซ่อมแต่ละใบมอบหมายให้ช่างคนเดียว (ผ่านฟิลด์ <code>assigned_to</code>)</li>
+                        <li><strong class="ans-highlight">repair_requests กับ repair_images:</strong> ความสัมพันธ์แบบ <strong>1:N (One-to-Many)</strong> ใบแจ้งซ่อม 1 ใบ สามารถมีรูปภาพประกอบได้หลายรูป ทั้งภาพก่อนซ่อมและภาพหลังซ่อม (ผ่านฟิลด์ <code>repair_id</code>)</li>
+                        <li><strong class="ans-highlight">repair_requests กับ comments:</strong> ความสัมพันธ์แบบ <strong>1:N (One-to-Many)</strong> ใบแจ้งซ่อม 1 ใบ สามารถมีความคิดเห็นประกอบได้หลายข้อความ (ผ่านฟิลด์ <code>repair_id</code>)</li>
+                        <li><strong class="ans-highlight">users กับ comments:</strong> ความสัมพันธ์แบบ <strong>1:N (One-to-Many)</strong> ผู้ใช้งาน 1 คน สามารถเขียนความคิดเห็นได้หลายข้อความ (ผ่านฟิลด์ <code>user_id</code>)</li>
+                    </ul>
+                    <p><strong>2. เหตุผลที่ต้องแยกตาราง <code>repair_images</code> ออกจาก <code>repair_requests</code>:</strong></p>
+                    <ul>
+                        <li><strong>เป็นไปตามกฎ Normalization (1NF):</strong> ป้องกันการเกิด Repeating Groups เพราะงานซ่อมแต่ละงานอาจมีภาพถ่ายได้หลายภาพ (เช่น ก่อนซ่อม 2 รูป หลังซ่อม 2 รูป)</li>
+                        <li><strong>ยืดหยุ่นและประหยัดพื้นที่:</strong> หากเก็บไว้ในตาราง repair_requests จะต้องสร้างคอลัมน์ล่วงหน้า เช่น <code>img1, img2, img3</code> ซึ่งจำกัดจำนวนรูป และหากไม่มีรูปก็จะสิ้นเปลืองพื้นที่จัดเก็บค่า NULL</li>
+                        <li><strong>จัดการง่าย:</strong> สามารถจำแนกประเภทภาพถ่ายได้ง่ายผ่านฟิลด์ <code>image_type</code> ('before' หรือ 'after') และสามารถเพิ่มหรือลบรูปภาพได้อย่างอิสระ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนที่ 3 -->
+        <div class="section">
+            <div class="section-title">💻 ส่วนที่ 3: การพัฒนาด้วย PHP 8 (PHP Implementation)</div>
+            
+            <div class="subsection">
+                <h3>🔧 ตัวอย่างโค้ด: คลาส RepairRequest</h3>
+                <div class="code-block">
+&lt;?php
+class RepairRequest {
+    private int $id;
+    private string $requestNo;
+    private int $userId;
+    private string $building;
+    private string $room;
+    private string $problemType;
+    private string $description;
+    private string $urgency;
+    private string $status;
+    private ?int $assignedTo;
+    private ?string $dueDate;
+    private ?float $cost;
+    
+    public function __construct(
+        int $id,
+        string $requestNo,
+        int $userId,
+        string $building,
+        string $room,
+        string $problemType,
+        string $description,
+        string $urgency = 'medium',
+        string $status = 'pending'
+    ) {
+        $this-&gt;id = $id;
+        $this-&gt;requestNo = $requestNo;
+        $this-&gt;userId = $userId;
+        $this-&gt;building = $building;
+        $this-&gt;room = $room;
+        $this-&gt;problemType = $problemType;
+        $this-&gt;description = $description;
+        $this-&gt;urgency = $urgency;
+        $this-&gt;status = $status;
+        $this-&gt;assignedTo = null;
+        $this-&gt;dueDate = null;
+        $this-&gt;cost = null;
+    }
+    
+    // Getters
+    public function getId(): int { return $this-&gt;id; }
+    public function getRequestNo(): string { return $this-&gt;requestNo; }
+    public function getStatus(): string { return $this-&gt;status; }
+    
+    // Business Logic Methods
+    public function assignTo(int $technicianId, string $dueDate): void {
+        $this-&gt;assignedTo = $technicianId;
+        $this-&gt;dueDate = $dueDate;
+        $this-&gt;status = 'accepted';
+    }
+    
+    public function startRepair(): void {
+        if ($this-&gt;status !== 'accepted') {
+            throw new Exception('Cannot start repair: Request not accepted yet');
+        }
+        $this-&gt;status = 'in_progress';
+    }
+    
+    public function completeRepair(float $cost, string $result): void {
+        $this-&gt;cost = $cost;
+        $this-&gt;status = 'completed';
+        // Save result to database
+    }
+}
+?&gt;
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 3.1</span>
+                <p><strong>จากโค้ดข้างต้น</strong> จงอธิบายว่าหลักการ Encapsulation ถูกนำมาใช้อย่างไร และเหตุใดจึงใช้ <code>?int</code> และ <code>?string</code> (Nullable Types)</p>
+                <div class="answer-space filled">
+                    <p><strong>1. การนำหลักการ Encapsulation (การห่อหุ้มข้อมูล) มาใช้:</strong></p>
+                    <ul>
+                        <li><strong class="ans-highlight">การซ่อนข้อมูล (Data Hiding):</strong> มีการกำหนด Visibility ของคุณลักษณะ (Attributes) ทั้งหมดให้เป็น <code>private</code> เช่น <code>private string $status;</code> หรือ <code>private ?float $cost;</code> เพื่อป้องกันไม่ให้โค้ดภายนอกเข้าถึงหรือแก้ไขค่าได้โดยตรง</li>
+                        <li><strong class="ans-highlight">การเข้าถึงผ่าน Getters:</strong> อนุญาตให้อ่านค่าได้ผ่านทาง Public Methods เช่น <code>getId()</code>, <code>getStatus()</code></li>
+                        <li><strong class="ans-highlight">การควบคุม Business Logic:</strong> การแก้ไขสถานะหรือค่าสำคัญถูกควบคุมผ่าน Methods เฉพาะทาง เช่น <code>assignTo()</code>, <code>startRepair()</code>, <code>completeRepair()</code> โดยมีเงื่อนไขตรวจสอบความถูกต้องก่อนปรับเปลี่ยนค่า เพื่อรักษาความคงเส้นคงวาและความถูกต้องของข้อมูล (Data Integrity)</li>
+                    </ul>
+                    <p><strong>2. เหตุผลที่ใช้ <code>?int</code> และ <code>?string</code> (Nullable Types ใน PHP 8):</strong></p>
+                    <ul>
+                        <li>เครื่องหมายคำถาม (<code>?</code>) หน้า Type หมายถึง ตัวแปรนั้นสามารถเก็บค่าตาม Type นั้นๆ หรือสามารถเป็นค่า <code>null</code> ก็ได้</li>
+                        <li>ในระบบแจ้งซ่อม ข้อมูลบางส่วนจะ<strong>ยังไม่มีค่าในตอนเริ่มต้นสร้างใบแจ้งซ่อม</strong> เช่น:
+                            <ul>
+                                <li><code>?int $assignedTo</code>: ตอนแจ้งซ่อมยังไม่มีการมอบหมายช่าง ค่าจึงต้องเป็น <code>null</code></li>
+                                <li><code>?string $dueDate</code>: ยังไม่ได้ระบุวันแล้วเสร็จจนกว่าแอดมินจะกดมอบหมายงาน</li>
+                                <li><code>?float $cost</code>: ค่าใช้จ่ายยังไม่ทราบแน่ชัดจนกว่าช่างจะซ่อมเสร็จสิ้น</li>
+                            </ul>
+                        </li>
+                        <li>การใช้ Nullable Types ช่วยให้เขียนโค้ดตามมาตรฐาน Strict Typing ของ PHP 8 ได้อย่างปลอดภัย ไม่เกิด Type Error เมื่อค่ายังไม่ได้ถูกกำหนด</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 3.2</span>
+                <p><strong>จงเขียน PHP Function</strong> สำหรับสร้างรหัสใบแจ้งซ่อมอัตโนมัติ (Format: RP-YYYYMM-XXX เช่น RP-202401-001)</p>
+                <div class="answer-space filled">
+                    <pre class="ans-code">function generateRequestNo(PDO $conn): string {
+    // 1. ดึงปีและเดือนปัจจุบันในรูปแบบ YYYYMM เช่น 202609
+    $yearMonth = date("Ym");
+    $prefix = "RP-" . $yearMonth . "-";
+    
+    // 2. ค้นหารหัสแจ้งซ่อมล่าสุดของเดือนนี้จากฐานข้อมูล
+    $query = "SELECT request_no FROM repair_requests 
+              WHERE request_no LIKE :prefix 
+              ORDER BY request_no DESC LIMIT 1";
+              
+    $stmt = $conn->prepare($query);
+    $searchPrefix = $prefix . "%";
+    $stmt->bindParam(':prefix', $searchPrefix);
+    $stmt->execute();
+    
+    // 3. ตรวจสอบว่าในเดือนนี้มีรายการแจ้งซ่อมแล้วหรือไม่
+    if ($stmt->rowCount() > 0) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        // แยกสตริงด้วยเครื่องหมาย '-' แล้วเอาตัวเลข 3 หลักท้ายมาเพิ่มค่า 1
+        $parts = explode("-", $row['request_no']);
+        $last_num = (int)end($parts);
+        $new_num = $last_num + 1;
+        // จัดรูปแบบเป็นตัวเลข 3 หลัก เช่น 002, 015 ด้วย sprintf
+        return sprintf("%s%03d", $prefix, $new_num);
+    } else {
+        // หากเป็นรายการแรกของเดือน เริ่มต้นที่ 001
+        return sprintf("%s%03d", $prefix, 1);
+    }
+}</pre>
+                    <p><strong>คำอธิบายการทำงาน:</strong> ฟังก์ชันจะอ่านปี-เดือนปัจจุบัน หากขึ้นเดือนใหม่จะรีเซ็ตเลขลำดับกลับไปเริ่มต้นที่ <code>001</code> แต่หากอยู่ในเดือนเดียวกันจะนำเลขลำดับล่าสุดมา <code>+1</code> และเติมเลขศูนย์ด้านหน้าให้ครบ 3 หลักเสมอ</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 3.3</span>
+                <p><strong>จงอธิบาย State Transition</strong> ของ <code>status</code> ในคลาส <code>RepairRequest</code> ว่าเปลี่ยนจาก <code>pending → accepted → in_progress → completed</code> ได้อย่างไร และเหตุใดจึงต้องมีเงื่อนไขตรวจสอบใน method <code>startRepair()</code></p>
+                <div class="answer-space filled">
+                    <p><strong>1. วงจรการเปลี่ยนสถานะ (State Transition):</strong></p>
+                    <ul>
+                        <li><strong class="ans-highlight">pending (รอรับเรื่อง):</strong> สถานะเริ่มต้นทันทีที่สร้างคำขอแจ้งซ่อมผ่านฟอร์ม (Constructor กำหนดค่า default เป็น 'pending')</li>
+                        <li><strong class="ans-highlight">accepted (รับเรื่องแล้ว):</strong> เปลี่ยนเมื่อ Admin เรียกเมธอด <code>assignTo($technicianId, $dueDate)</code> เพื่อมอบหมายช่างและกำหนดวันเสร็จสิ้น</li>
+                        <li><strong class="ans-highlight">in_progress (กำลังดำเนินการ):</strong> เปลี่ยนเมื่อช่างซ่อมเข้ามารับงานแล้วเริ่มปฏิบัติงานจริง โดยเรียกเมธอด <code>startRepair()</code></li>
+                        <li><strong class="ans-highlight">completed (ซ่อมเสร็จ):</strong> เปลี่ยนเมื่อช่างซ่อมงานเสร็จสิ้น โดยเรียกเมธอด <code>completeRepair($cost, $result)</code> พร้อมบันทึกสรุปค่าใช้จ่ายและรายละเอียดการแก้ไข</li>
+                    </ul>
+                    <p><strong>2. เหตุใดจึงต้องมีเงื่อนไขตรวจสอบใน method <code>startRepair()</code>:</strong></p>
+                    <pre class="ans-code">if ($this->status !== 'accepted') {
+    throw new Exception('Cannot start repair: Request not accepted yet');
+}</pre>
+                    <ul>
+                        <li><strong>รักษาความถูกต้องของขั้นตอนการทำงาน (Workflow Integrity):</strong> ป้องกันไม่ให้ช่างหรือผู้ใช้กดข้ามขั้นตอน เช่น ไม่สามารถเริ่มซ่อมใบงานที่สถานะยังเป็น <code>pending</code> (ยังไม่ได้รับเรื่องหรือยังไม่ได้มอบหมายงานให้ช่างอย่างเป็นทางการ)</li>
+                        <li><strong>ป้องกันข้อผิดพลาดเชิงตรรกะ (Logical Error):</strong> ช่วยให้แน่ใจว่างานซ่อมทุกชิ้นต้องมีผู้รับผิดชอบและกำหนดการชัดเจนก่อนลงมือจริง และดักจับความพยายามยิง Request ข้ามขั้นตอนจากฝั่งไคลเอนต์</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนที่ 4 -->
+        <div class="section">
+            <div class="section-title">🎨 ส่วนที่ 4: การออกแบบอินเทอร์เฟซ (UI/UX Design)</div>
+            
+            <div class="subsection">
+                <h3>📱 หน้าจอหลักของระบบ</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>หน้าจอ</th>
+                            <th>ผู้ใช้ที่เข้าถึงได้</th>
+                            <th>ฟังก์ชันหลัก</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dashboard</td>
+                            <td>ทุกบทบาท</td>
+                            <td>สรุปสถิติ, งานที่รับผิดชอบ</td>
+                        </tr>
+                        <tr>
+                            <td>แจ้งซ่อมใหม่</td>
+                            <td>ครู/บุคลากร</td>
+                            <td>กรอกข้อมูล, แนบรูปภาพ</td>
+                        </tr>
+                        <tr>
+                            <td>รายการแจ้งซ่อม</td>
+                            <td>ทุกบทบาท</td>
+                            <td>ดูรายการ, ค้นหา, กรอง</td>
+                        </tr>
+                        <tr>
+                            <td>รายละเอียดใบแจ้งซ่อม</td>
+                            <td>ทุกบทบาท</td>
+                            <td>ดูข้อมูล, เพิ่มความคิดเห็น, อัปเดตสถานะ</td>
+                        </tr>
+                        <tr>
+                            <td>จัดการผู้ใช้</td>
+                            <td>ผู้ดูแลเท่านั้น</td>
+                            <td>เพิ่ม/แก้ไข/ลบผู้ใช้</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="question">
+                <span class="question-number">คำถามที่ 4.1</span>
+                <p><strong>จงออกแบบ Wireframe</strong> ของหน้า "แจ้งซ่อมใหม่" โดยระบุองค์ประกอบหลัก (Form Fields, Buttons, Validation)</p>
+                <div class="answer-space filled">
+                    <p><strong>1. ภาพแบบร่างหน้าจอ (UI Wireframe):</strong></p>
+                    <div style="text-align: center; margin: 12px 0;">
+                        <img src="wireframe_new_request.png" alt="Wireframe หน้าแจ้งซ่อมใหม่" style="max-width: 100%; width: 620px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                    </div>
+                    <p><strong>2. องค์ประกอบหลักในแบบฟอร์ม (Form Fields & Buttons):</strong></p>
+                    <ul>
+                        <li><strong>อาคาร (Building):</strong> กล่องข้อความกรอกชื่ออาคารที่พบปัญหา เช่น อาคาร 1, อาคารวิทยาศาสตร์</li>
+                        <li><strong>ห้อง / จุดที่พบปัญหา (Room):</strong> กล่องข้อความกรอกหมายเลขห้องหรือบริเวณ เช่น ห้อง 204, ห้องพักครู</li>
+                        <li><strong>ประเภทปัญหา (Problem Type):</strong> เมนู Dropdown ให้เลือกประเภทปัญหา ได้แก่ ไฟฟ้า, เฟอร์นิเจอร์, คอมพิวเตอร์, แอร์, และอื่นๆ</li>
+                        <li><strong>รายละเอียดปัญหา (Description):</strong> กล่องข้อความขนาดใหญ่ สำหรับอธิบายอาการชำรุดโดยละเอียด</li>
+                        <li><strong>ระดับความเร่งด่วน (Urgency):</strong> ปุ่ม Radio ให้เลือก 3 ระดับ คือ ทั่วไป (Low), ปานกลาง (Medium - ค่าเริ่มต้น), และด่วนมาก (High)</li>
+                        <li><strong>แนบรูปภาพก่อนซ่อม (Image Upload):</strong> ช่องอัปโหลดไฟล์รูปภาพหลักฐานก่อนซ่อม (บังคับแนบ)</li>
+                        <li><strong>ปุ่มสั่งการ (Buttons):</strong> ปุ่ม "ส่งใบแจ้งซ่อม" สำหรับบันทึกข้อมูล และปุ่ม "ยกเลิก" สำหรับกลับหน้าหลัก</li>
+                    </ul>
+                    <p><strong>3. การตรวจสอบความถูกต้องของข้อมูล (Validation):</strong></p>
+                    <ul>
+                        <li><strong>ฝั่ง Client (หน้าเว็บ):</strong> ใช้ HTML5 attribute <code>required</code> กำหนดให้ต้องกรอกข้อมูลทุกช่อง และเขียน JavaScript เช็คนามสกุลไฟล์รูปภาพ (เฉพาะ .jpg, .jpeg, .png) พร้อมเช็คขนาดไฟล์ไม่เกิน 5 MB</li>
+                        <li><strong>ฝั่ง Server (PHP):</strong> ตรวจสอบว่ามีค่า POST ครบถ้วน ไม่เป็นค่าว่าง และตรวจสอบไฟล์อัปโหลดว่าไม่มี Error หากไม่ครบถ้วนจะแสดงข้อความแจ้งเตือนผ่าน SweetAlert2</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนที่ 5 -->
+        <div class="section">
+            <div class="section-title">🚀 ส่วนที่ 5: โจทย์ฝึกปฏิบัติ (Coding Exercise)</div>
+            
+            <div class="highlight-box">
+                <strong>📦 สิ่งที่ต้องส่ง:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>✅ ซอร์สโค้ด PHP (ไฟล์ .php ทั้งหมด)</li>
+                    <li>✅ ฐานข้อมูล SQL (ไฟล์ .sql)</li>
+                    <li>✅ คู่มือติดตั้ง (README.md)</li>
+                    <li>✅ Screenshots ของหน้าจอหลัก</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">โจทย์ที่ 5.1</span>
+                <p><strong>สร้างระบบ Login</strong> พร้อม Session Management และตรวจสอบสิทธิ์การเข้าถึงหน้าต่างๆ</p>
+                <div class="answer-space filled">
+                    <p><strong>1. โค้ดประมวลผลการเข้าสู่ระบบและบันทึก Session (ไฟล์ <code>index.php</code>):</strong></p>
+                    <pre class="ans-code">&lt;?php
+session_start();
+require_once 'config/database.php';
+require_once 'classes/User.php';
+
+// หากมีการ Login ค้างไว้อยู่แล้ว ให้ข้ามไปหน้า Dashboard ทันที
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+
+    $db = new Database();
+    $conn = $db->getConnection();
+    $user = new User($conn);
+
+    // เมธอด login() ตรวจสอบรหัสผ่านด้วย password_verify()
+    if ($user->login($username, $password)) {
+        // บันทึกข้อมูลลงใน Session เพื่อใช้ระบุตัวตนและตรวจสอบสิทธิ์
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['role'] = $user->role;
+        $_SESSION['fullname'] = $user->fullname;
+        header("Location: dashboard.php");
+        exit();
+    } else {
+        $error_msg = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
+    }
+}
+?&gt;</pre>
+                    <p><strong>2. โค้ดตรวจสอบสิทธิ์การเข้าถึงหน้าต่างๆ (Protected Pages):</strong></p>
+                    <pre class="ans-code">&lt;?php
+session_start();
+
+// 1. ตรวจสอบว่าผู้ใช้ผ่านการ Login หรือไม่ ถ้ายังให้ Redirect ไปหน้า Login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+// 2. ตรวจสอบสิทธิ์เฉพาะบทบาท (Role-based Authorization)
+// ตัวอย่าง: ตรวจสอบสิทธิ์เฉพาะผู้ดูแลระบบ (Admin)
+if ($_SESSION['role'] !== 'admin') {
+    die("ขออภัย คุณไม่มีสิทธิ์เข้าถึงหน้านี้");
+}
+?&gt;</pre>
+                    <p><strong>คำอธิบาย:</strong> ใช้ฟังก์ชัน <code>session_start()</code> ในการจัดเก็บข้อมูล Session ฝั่งเซิร์ฟเวอร์ โดยรหัสผ่านผ่านการตรวจสอบอย่างปลอดภัย และทุกหน้าที่ต้องจำกัดสิทธิ์จะมีการตรวจเช็ค <code>$_SESSION['user_id']</code> และ <code>$_SESSION['role']</code> ที่ส่วนบนสุดของไฟล์เสมอ</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">โจทย์ที่ 5.2</span>
+                <p><strong>สร้างหน้า Dashboard</strong> แสดงสถิติ: จำนวนงานทั้งหมด, งานที่รอดำเนินการ, งานที่กำลังดำเนินการ, งานที่เสร็จแล้ว</p>
+                <div class="answer-space filled">
+                    <p><strong>1. เมธอดดึงข้อมูลสถิติด้วย SQL (ในคลาส <code>RepairRequest.php</code>):</strong></p>
+                    <pre class="ans-code">public function getStats() {
+    $query = "SELECT 
+                COUNT(*) as total,
+                SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,
+                SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) as in_progress,
+                SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed
+              FROM " . $this->table_name;
+              
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}</pre>
+                    <p><strong>2. โค้ดแสดงผลเป็นการ์ดสรุปสถิติบน Dashboard (ในไฟล์ <code>dashboard.php</code>):</strong></p>
+                    <pre class="ans-code">&lt;?php
+$stats = $repair->getStats();
+?&gt;
+&lt;div class="stats-grid"&gt;
+    &lt;div class="stat-card primary"&gt;
+        &lt;div class="stat-value"&gt;&lt;?= $stats['total'] ?&gt;&lt;/div&gt;
+        &lt;div class="stat-label"&gt;งานทั้งหมด&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stat-card warning"&gt;
+        &lt;div class="stat-value"&gt;&lt;?= $stats['pending'] ?&gt;&lt;/div&gt;
+        &lt;div class="stat-label"&gt;รอดำเนินการ&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stat-card info"&gt;
+        &lt;div class="stat-value"&gt;&lt;?= $stats['in_progress'] ?&gt;&lt;/div&gt;
+        &lt;div class="stat-label"&gt;กำลังซ่อม&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stat-card success"&gt;
+        &lt;div class="stat-value"&gt;&lt;?= $stats['completed'] ?&gt;&lt;/div&gt;
+        &lt;div class="stat-label"&gt;เสร็จสิ้น&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+                    <p><strong>คำอธิบาย:</strong> ใช้คำสั่ง SQL <code>COUNT(*)</code> ร่วมกับ <code>SUM(CASE WHEN ...)</code> ช่วยให้นับจำนวนงานแยกตามสถานะต่างๆ ได้ครบถ้วนในคำสั่ง Query เพียงรอบเดียว ทำให้ระบบโหลดหน้า Dashboard ได้รวดเร็วและใช้ทรัพยากรน้อย</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">โจทย์ที่ 5.3</span>
+                <p><strong>สร้างระบบอัปโหลดรูปภาพ</strong> ก่อน-หลังซ่อม พร้อมแสดงรูปภาพในหน้ารายละเอียด</p>
+                <div class="answer-space filled">
+                    <p><strong>1. โค้ดบันทึกและอัปโหลดไฟล์รูปภาพ (ฝั่งเซิร์ฟเวอร์ PHP):</strong></p>
+                    <pre class="ans-code">// ตรวจสอบว่ามีการแนบไฟล์และไม่มี error
+if (isset($_FILES['repair_image']) && $_FILES['repair_image']['error'] == 0) {
+    $targetDir = "uploads/";
+    if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
+    
+    // สุ่มชื่อไฟล์ใหม่ด้วย uniqid() ป้องกันชื่อไฟล์ซ้ำกัน
+    $fileName = uniqid() . "_" . basename($_FILES["repair_image"]["name"]);
+    $targetFilePath = $targetDir . $fileName;
+    
+    // ย้ายไฟล์ชั่วคราว (tmp) ไปยังโฟลเดอร์ uploads/
+    if (move_uploaded_file($_FILES["repair_image"]["tmp_name"], $targetFilePath)) {
+        // บันทึก path รูปภาพลงในตาราง repair_images โดยระบุชนิด ('before' หรือ 'after')
+        $stmt = $conn->prepare("INSERT INTO repair_images (repair_id, image_type, image_path) VALUES (?, 'before', ?)");
+        $stmt->execute([$repair_id, $targetFilePath]);
+    }
+}</pre>
+                    <p><strong>2. โค้ดดึงรูปภาพและแสดงผลในหน้ารายละเอียด (ไฟล์ <code>request_detail.php</code>):</strong></p>
+                    <pre class="ans-code">&lt;?php
+// ดึงข้อมูลรูปภาพทั้งหมดที่ผูกกับใบแจ้งซ่อมนี้
+$imagesData = $repair->getImages($id);
+$images = ['before' => [], 'after' => []];
+while ($img = $imagesData->fetch(PDO::FETCH_ASSOC)) {
+    $images[$img['image_type']][] = $img['image_path'];
+}
+?&gt;
+
+&lt;!-- แสดงภาพถ่ายก่อนซ่อม --&gt;
+&lt;strong&gt;รูปภาพก่อนซ่อม:&lt;/strong&gt;
+&lt;div class="image-gallery"&gt;
+    &lt;?php foreach($images['before'] as $imgPath): ?&gt;
+        &lt;img src="&lt;?= htmlspecialchars($imgPath) ?&gt;" alt="รูปก่อนซ่อม"&gt;
+    &lt;?php endforeach; ?&gt;
+&lt;/div&gt;</pre>
+                    <p><strong>คำอธิบาย:</strong> ระบบใช้ <code>move_uploaded_file()</code> ย้ายไฟล์ที่ปลอดภัย พร้อมตั้งชื่อใหม่ด้วย <code>uniqid()</code> และแยกเก็บความสัมพันธ์ลงในตาราง <code>repair_images</code> ทำให้สามารถรองรับได้ทั้งรูปก่อนซ่อม ('before') และรูปหลังซ่อม ('after')</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">โจทย์ที่ 5.4</span>
+                <p><strong>สร้างระบบแจ้งเตือน</strong> ด้วย SweetAlert2 เมื่อ:
+                    <br>• แจ้งซ่อมสำเร็จ
+                    <br>• มอบหมายงานสำเร็จ
+                    <br>• อัปเดตสถานะสำเร็จ
+                </p>
+                <div class="answer-space filled">
+                    <p><strong>1. นำเข้า SweetAlert2 CDN ในส่วน &lt;head&gt;:</strong></p>
+                    <pre class="ans-code">&lt;script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"&gt;&lt;/script&gt;</pre>
+                    <p><strong>2. โค้ด JavaScript เชื่อมต่อค่าสถานะจาก PHP เพื่อแสดงแจ้งเตือน (Modal Alert):</strong></p>
+                    <pre class="ans-code">&lt;script&gt;
+&lt;?php if(!empty($message)): ?&gt;
+    Swal.fire({
+        icon: '&lt;?= $messageType ?&gt;', // 'success', 'warning', 'error'
+        title: '&lt;?= $messageType == "success" ? "สำเร็จ!" : "แจ้งเตือน" ?&gt;',
+        text: '&lt;?= $message ?&gt;',
+        confirmButtonColor: '#4f46e5',
+        confirmButtonText: 'ตกลง'
+    }).then((result) =&gt; {
+        &lt;?php if($messageType == 'success'): ?&gt;
+            // เมื่อกดตกลง ให้เปลี่ยนหน้าอัตโนมัติ เช่น กลับไปหน้า Dashboard
+            window.location.href = 'dashboard.php';
+        &lt;?php endif; ?&gt;
+    });
+&lt;?php endif; ?&gt;
+&lt;/script&gt;</pre>
+                    <p><strong>3. การกำหนดข้อความตอบกลับในฝั่ง PHP:</strong></p>
+                    <ul>
+                        <li><strong class="ans-highlight">แจ้งซ่อมสำเร็จ:</strong> <code>$message = "บันทึกใบแจ้งซ่อมและอัปโหลดรูปภาพสำเร็จ"; $messageType = "success";</code></li>
+                        <li><strong class="ans-highlight">มอบหมายงานสำเร็จ:</strong> <code>$message = "มอบหมายงานสำเร็จ"; $messageType = "success";</code></li>
+                        <li><strong class="ans-highlight">อัปเดตสถานะสำเร็จ:</strong> <code>$message = "เริ่มดำเนินการซ่อมแซมแล้ว";</code> หรือ <code>$message = "บันทึกผลการซ่อมสำเร็จ"; $messageType = "success";</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">โจทย์ที่ 5.5 (Bonus)</span>
+                <p><strong>สร้างระบบส่งออกข้อมูล</strong> เป็นไฟล์ CSV และสร้างฟังก์ชันพิมพ์ใบแจ้งซ่อมเป็น PDF</p>
+                <div class="answer-space filled">
+                    <p><strong>1. ระบบส่งออกข้อมูลรายงานเป็นไฟล์ CSV (ไฟล์ <code>export_csv.php</code>):</strong></p>
+                    <pre class="ans-code">&lt;?php
+session_start();
+require_once 'config/database.php';
+require_once 'classes/RepairRequest.php';
+
+// ตรวจสอบสิทธิ์ผู้ใช้
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$db = new Database();
+$repair = new RepairRequest($db->getConnection());
+$requests = $repair->readAll();
+
+// ตั้งค่า Header สำหรับดาวน์โหลดไฟล์ CSV
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename=repair_requests_' . date('Ymd') . '.csv');
+
+// ใส่ UTF-8 BOM (\xEF\xBB\xBF) ป้องกันปัญหาเปิดใน MS Excel แล้วภาษาไทยอ่านไม่ออก
+echo "\xEF\xBB\xBF";
+
+$output = fopen('php://output', 'w');
+// เขียนแถวหัวตาราง
+fputcsv($output, ['รหัสแจ้งซ่อม', 'อาคาร', 'ห้อง', 'ประเภทปัญหา', 'รายละเอียด', 'ความเร่งด่วน', 'สถานะ', 'ผู้แจ้ง', 'วันที่แจ้ง', 'ช่างที่รับผิดชอบ', 'วันที่เสร็จสิ้น', 'ค่าใช้จ่าย (บาท)', 'ผลการซ่อม']);
+
+// วนลูปเขียนข้อมูลแต่ละแถว
+while ($row = $requests->fetch(PDO::FETCH_ASSOC)) {
+    fputcsv($output, [
+        $row['request_no'],
+        $row['building'],
+        $row['room'],
+        $row['problem_type'],
+        $row['description'],
+        $row['urgency'],
+        $row['status'],
+        $row['requester_name'],
+        $row['created_at'],
+        !empty($row['technician_name']) ? $row['technician_name'] : 'ยังไม่ระบุ',
+        !empty($row['completion_date']) ? $row['completion_date'] : '-',
+        isset($row['cost']) && $row['cost'] !== null ? number_format($row['cost'], 2) : '-',
+        !empty($row['result']) ? $row['result'] : '-'
+    ]);
+}
+fclose($output);
+exit();
+?&gt;</pre>
+                    <p><strong>2. ฟังก์ชันพิมพ์ใบแจ้งซ่อมเป็น PDF (ผ่าน CSS Print Preview & Browser Print):</strong></p>
+                    <pre class="ans-code">&lt;!-- CSS ซ่อนส่วนที่ไม่ต้องการพิมพ์ เช่น เมนูและปุ่มสั่งการ --&gt;
+&lt;style&gt;
+@media print {
+    .no-print { display: none !important; }
+    body { padding: 0; background: white; }
+    .container { box-shadow: none; border: none; max-width: 100%; }
+}
+&lt;/style&gt;
+
+&lt;!-- ปุ่มสั่งพิมพ์ใบงาน (ผู้ใช้เลือกบันทึกเป็น 'Save as PDF' ได้ทันที) --&gt;
+&lt;button onclick="window.print()" class="btn btn-secondary no-print"&gt;🖨️ พิมพ์/PDF&lt;/button&gt;</pre>
+                    <p><strong>คำอธิบาย:</strong> การส่งออก CSV ใช้ <code>fputcsv()</code> พร้อมใส่ Byte Order Mark (BOM) เพื่อให้รองรับภาษาไทยใน Microsoft Excel และการพิมพ์ PDF ใช้เทคนิค CSS <code>@media print</code> ร่วมกับ <code>window.print()</code> ทำให้ได้เอกสารขนาดพอดี A4 โดยไม่ต้องพึ่งพา Library เพิ่มเติม</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนที่ 6: FAQ & Student Inquiries -->
+        <div class="section">
+            <div class="section-title">💡 ส่วนที่ 6: คำถามที่นักศึกษาต้องการทราบ / ข้อสงสัยที่พบบ่อย (FAQ & Clarifications)</div>
+            
+            <div class="subsection">
+                <h3>🔍 ข้อสงสัยที่พบบ่อย (Frequently Asked Questions)</h3>
+                <p style="color:#7f8c8d; font-size:14px; margin-bottom:15px;">รวมคำถามที่นักศึกษามักสงสัยในการวิเคราะห์และออกแบบระบบแจ้งซ่อมโรงเรียน พร้อมแนวคำตอบเพื่อทบทวนความเข้าใจ</p>
+                
+                <div class="faq-item">
+                    <div class="faq-q">❓ Q1: ทำไมต้องใช้ ENUM สำหรับฟิลด์ <code>status</code> และ <code>problem_type</code> ในฐานข้อมูล?</div>
+                    <div class="faq-a">
+                        <strong>แนวคำตอบ:</strong> การใช้ <code>ENUM</code> มีข้อดีหลายประการ:
+                        <ul>
+                            <li><strong>จำกัดค่าที่รับได้:</strong> ป้องกันการป้อนค่าที่ไม่ถูกต้อง เช่น พิมพ์ status ผิดเป็น "pendding"</li>
+                            <li><strong>ประหยัดพื้นที่:</strong> MySQL เก็บ ENUM เป็นตัวเลขภายใน (1 byte) แทนที่จะเก็บเป็น string</li>
+                            <li><strong>ความหมายชัดเจน:</strong> ทำให้ Developer ทราบว่าระบบมีสถานะอะไรบ้างโดยไม่ต้องดูเอกสาร</li>
+                            <li><strong>ง่ายต่อการ Query:</strong> เช่น <code>WHERE status = 'pending'</code> ไม่ต้องกลัว typo</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">❓ Q2: ทำไมต้องแยกตาราง <code>repair_images</code> ออกจาก <code>repair_requests</code>? เก็บเป็น path ในตารางหลักเลยไม่ได้หรือ?</div>
+                    <div class="faq-a">
+                        <strong>แนวคำตอบ:</strong> การแยกตารางเป็นหลักการ <strong>Normalization (1NF)</strong> เพราะ:
+                        <ul>
+                            <li><strong>1 ใบแจ้งซ่อม มีหลายรูป:</strong> ความสัมพันธ์เป็น 1:N (อาจมีรูปก่อนซ่อม 2 รูป, หลังซ่อม 3 รูป)</li>
+                            <li><strong>ยืดหยุ่น:</strong> เพิ่มรูปได้ไม่จำกัด ไม่ต้องแก้โครงสร้างตาราง</li>
+                            <li><strong>Query ง่าย:</strong> <code>SELECT * FROM repair_images WHERE repair_id = ?</code></li>
+                            <li><strong>ถ้าเก็บในตารางหลัก:</strong> ต้องสร้างคอลัมน์ <code>image1, image2, image3...</code> ซึ่งไม่ยืดหยุ่นและเสียพื้นที่</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">❓ Q3: ในโค้ด PHP มีสัญลักษณ์ <code>?int</code> และ <code>?string</code> มันคืออะไร?</div>
+                    <div class="faq-a">
+                        <strong>แนวคำตอบ:</strong> คือ <strong>Nullable Types</strong> ใน PHP 8+ หมายถึง ตัวแปรนั้นสามารถรับค่าเป็น <code>int</code> (หรือ string) <strong>หรือ</strong> ค่า <code>null</code> ก็ได้ มักใช้กับ Attribute ที่ "อาจจะยังไม่มีค่า" ในช่วงแรก เช่น:
+                        <ul>
+                            <li><code>$assignedTo</code> - เจ้าหน้าที่ที่ยังไม่ถูกมอบหมายงาน</li>
+                            <li><code>$dueDate</code> - วันเสร็จที่ยังไม่ได้กำหนด</li>
+                            <li><code>$cost</code> - ค่าใช้จ่ายที่ยังไม่ทราบจนกว่าจะซ่อมเสร็จ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">❓ Q4: การอัปโหลดรูปภาพต้องระวังเรื่องความปลอดภัยอะไรบ้าง?</div>
+                    <div class="faq-a">
+                        <strong>แนวคำตอบ:</strong> การอัปโหลดไฟล์เป็นจุดเสี่ยงสำคัญ ต้องตรวจสอบดังนี้:
+                        <ul>
+                            <li><strong>ตรวจสอบประเภทไฟล์:</strong> ใช้ <code>mime_content_type()</code> หรือ <code>finfo_file()</code> ไม่ใช่แค่ <code>$_FILES['file']['type']</code> (ปลอมแปลงได้)</li>
+                            <li><strong>จำกัดขนาดไฟล์:</strong> เช่น ไม่เกิน 5 MB</li>
+                            <li><strong>เปลี่ยนชื่อไฟล์:</strong> ใช้ UUID หรือ timestamp แทนชื่อเดิม ป้องกันการ overwrite</li>
+                            <li><strong>เก็บนอก webroot:</strong> หรือใช้ <code>.htaccess</code> ป้องกันการ execute ไฟล์ PHP ที่อัปโหลดเข้ามา</li>
+                            <li><strong>จำกัดนามสกุล:</strong> อนุญาตเฉพาะ <code>.jpg, .jpeg, .png, .gif</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">❓ Q5: ทำไมต้องใช้ SweetAlert2 แทน <code>alert()</code> หรือ <code>confirm()</code> ของ JavaScript?</div>
+                    <div class="faq-a">
+                        <strong>แนวคำตอบ:</strong> SweetAlert2 มีข้อดีกว่ามาก:
+                        <ul>
+                            <li><strong>สวยงาม:</strong> UI ทันสมัย ปรับแต่งสี/ไอคอนได้</li>
+                            <li><strong>Responsive:</strong> ใช้งานได้ทั้ง Desktop และ Mobile</li>
+                            <li><strong>Promise-based:</strong> ใช้ <code>async/await</code> ได้ ทำให้จัดการ Flow ง่าย</li>
+                            <li><strong>มีหลายประเภท:</strong> success, error, warning, info, question</li>
+                            <li><strong>UX ดีกว่า:</strong> <code>alert()</code> ดั้งเดิมจะ block thread และดูเก่า</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">❓ Q6: การพิมพ์เป็น PDF ต้องทำอย่างไร? ต้องใช้ Library อะไร?</div>
+                    <div class="faq-a">
+                        <strong>แนวคำตอบ:</strong> มี 2 วิธีหลัก:
+                        <ul>
+                            <li><strong>วิธีที่ 1 - Browser Print:</strong> สร้าง CSS <code>@media print</code> แยกสำหรับพิมพ์ แล้วใช้ <code>window.print()</code> (ผู้ใช้เลือก "Save as PDF" ใน Print Dialog)</li>
+                            <li><strong>วิธีที่ 2 - PHP Library:</strong> ใช้ <code>Dompdf</code> หรือ <code>TCPDF</code> แปลง HTML เป็น PDF ฝั่ง Server (เหมาะสำหรับส่งอีเมลแนบ PDF)</li>
+                            <li><strong>วิธีที่ 3 - JS Library:</strong> ใช้ <code>html2pdf.js</code> หรือ <code>jsPDF</code> แปลงฝั่ง Client</li>
+                        </ul>
+                        สำหรับใบงานนี้ แนะนำวิธีที่ 1 เพราะง่ายที่สุดและไม่ต้องติดตั้ง Library เพิ่มเติม
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>📝 พื้นที่สำหรับบันทึก "คำถามที่นักศึกษาต้องการทราบ" (Student Inquiries)</h3>
+                <p style="color:#7f8c8d; font-size:14px; margin-bottom:15px;">หากนักศึกษามีข้อสงสัย หรือต้องการคำอธิบายเพิ่มเติมในประเด็นใด สามารถบันทึกไว้ที่นี่เพื่อสอบถามผู้สอนในคาบปฏิบัติได้</p>
+                
+                <div class="question">
+                    <span class="question-number">ข้อสงสัยที่ 1</span>
+                    <p><strong>ประเด็นที่สงสัย (เช่น เรื่อง Database Design, SQL, Normalization):</strong></p>
+                    <div class="answer-space filled">
+                        <p><strong class="ans-highlight">คำถาม / ข้อสงสัย:</strong> ในการออกแบบ Foreign Key ของตาราง <code>repair_requests</code> เหตุใดคอลัมน์ <code>assigned_to</code> จึงเลือกใช้ <code>ON DELETE SET NULL</code> ในขณะที่ <code>user_id</code> ใช้ <code>ON DELETE CASCADE</code>?</p>
+                        <p><strong class="ans-highlight">สิ่งที่เข้าใจและได้เรียนรู้:</strong> เพราะว่าความสำคัญของข้อมูลต่างกันครับ ในกรณีที่บัญชีช่างซ่อมถูกลบออกจากระบบ เรายังจำเป็นต้องเก็บประวัติใบแจ้งซ่อมนั้นไว้ตรวจสอบย้อนหลัง จึงปรับค่าผู้รับผิดชอบเป็น NULL เพื่อให้แอดมินมอบหมายช่างคนอื่นแทนได้ แต่กรณีของ <code>user_id</code> ถ้าบัญชีผู้แจ้งถูกลบ ข้อมูลงานแจ้งซ่อมที่เขาสร้างก็จะถูกลบตามไปด้วยเพื่อป้องกันปัญหาข้อมูลกำพร้าในระบบ</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">ข้อสงสัยที่ 2</span>
+                    <p><strong>ประเด็นที่สงสัย (เช่น เรื่อง PHP OOP, Session, Security):</strong></p>
+                    <div class="answer-space filled">
+                        <p><strong class="ans-highlight">คำถาม / ข้อสงสัย:</strong> ทำไมในระบบจริงปัจจุบันจึงไม่แนะนำให้ใช้ฟังก์ชัน <code>md5()</code> หรือ <code>sha1()</code> ในการแฮชรหัสผ่าน และ PHP 8 แนะนำให้จัดการรหัสผ่านอย่างไร?</p>
+                        <p><strong class="ans-highlight">สิ่งที่เข้าใจและได้เรียนรู้:</strong> <code>md5()</code> และ <code>sha1()</code> เป็นขั้นตอนวิธีที่ทำงานเร็วเกินไป และไม่มีกลไก Salt แบบสุ่ม ทำให้เสี่ยงต่อการถูกถอดรหัสผ่าน Rainbow Table หรือ Brute-force Attack ได้ง่ายมาก ใน PHP 8 จึงกำหนดให้ใช้ <code>password_hash($password, PASSWORD_DEFAULT)</code> สำหรับเข้ารหัส และใช้ <code>password_verify($password, $hash)</code> ในการตรวจสอบ ซึ่งใช้เทคนิค Bcrypt/Argon2 ที่มีความปลอดภัยสูงและเพิ่ม Salt สุ่มให้โดยอัตโนมัติ</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">ข้อสงสัยที่ 3</span>
+                    <p><strong>ประเด็นที่สงสัย (เช่น เรื่อง File Upload, SweetAlert2, PDF Export, UI/UX):</strong></p>
+                    <div class="answer-space filled">
+                        <p><strong class="ans-highlight">คำถาม / ข้อสงสัย:</strong> ทำไมการสั่งพิมพ์หรือบันทึกเป็น PDF ด้วยเทคนิค CSS <code>@media print</code> ร่วมกับคำสั่ง <code>window.print()</code> จึงเป็นที่นิยมและเหมาะสมกับงานนี้มากกว่าการใช้ PHP Library อย่าง Dompdf หรือ TCPDF?</p>
+                        <p><strong class="ans-highlight">สิ่งที่เข้าใจและได้เรียนรู้:</strong> เพราะการใช้ <code>@media print</code> ทำงานบนเว็บเบราว์เซอร์ของผู้ใช้โดยตรง ทำให้เรนเดอร์ฟอนต์ภาษาไทย (เช่น Sarabun) และจัดรูปแบบ CSS ได้สวยงามคมชัด ไม่เจอปัญหาฟอนต์ไทยกลายเป็นสี่เหลี่ยมหรือวรรณยุกต์จมลอยเหมือน Library ฝั่งเซิร์ฟเวอร์ อีกทั้งยังไม่ต้องติดตั้ง Composer Package เพิ่มเติม และประหยัดทรัพยากรการประมวลผลของ Web Server อีกด้วยครับ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนที่ 7: Evaluation -->
+        <div class="section">
+            <div class="section-title">📝 ส่วนที่ 7: การประเมินผล (Evaluation Criteria)</div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>เกณฑ์การให้คะแนน</th>
+                        <th>คะแนน</th>
+                        <th>รายละเอียด</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>การวิเคราะห์ความต้องการ</td>
+                        <td>15</td>
+                        <td>ระบุ User Roles, Use Cases, Noun Extraction ได้ถูกต้อง</td>
+                    </tr>
+                    <tr>
+                        <td>การออกแบบฐานข้อมูล</td>
+                        <td>20</td>
+                        <td>Schema design, Relationships, Normalization, SQL</td>
+                    </tr>
+                    <tr>
+                        <td>การพัฒนา PHP (Backend)</td>
+                        <td>25</td>
+                        <td>OOP, Security, Error Handling, State Management</td>
+                    </tr>
+                    <tr>
+                        <td>การออกแบบ UI/UX</td>
+                        <td>15</td>
+                        <td>Usability, Responsive Design, Wireframe</td>
+                    </tr>
+                    <tr>
+                        <td>ฟังก์ชันครบถ้วน</td>
+                        <td>20</td>
+                        <td>ทำงานได้ครบตามข้อกำหนด (Login, Upload, SweetAlert2)</td>
+                    </tr>
+                    <tr>
+                        <td>เอกสารประกอบ</td>
+                        <td>5</td>
+                        <td>README.md, Code Comments, Screenshots</td>
+                    </tr>
+                    <tr style="background: #667eea; color: white; font-weight: bold;">
+                        <td>รวม</td>
+                        <td>100</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; color: #7f8c8d;">
+            <p>💡 <strong>คำแนะนำ:</strong> ใช้ PHP 8+, MySQL 5.7+, และ SweetAlert2 สำหรับ UI Components</p>
+            <p>📚 <strong>เอกสารอ้างอิง:</strong> PHP Manual, MySQL Documentation, SweetAlert2 Docs</p>
+        </div>
+    </div>
+</body>
+</html>
