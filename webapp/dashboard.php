@@ -36,12 +36,9 @@ $requests = $repair->readAll();
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2>ภาพรวมงานซ่อม (Dashboard)</h2>
-            <div style="display: flex; gap: 10px;">
-                <a href="export_csv.php" class="btn btn-secondary" style="width: auto; padding: 0.5rem 1rem; background: #10b981; color: white;">📥 ส่งออก CSV</a>
-                <?php if($_SESSION['role'] == 'teacher' || $_SESSION['role'] == 'admin'): ?>
-                    <a href="new_request.php" class="btn btn-primary" style="width: auto; padding: 0.5rem 1rem;">+ แจ้งซ่อมใหม่</a>
-                <?php endif; ?>
-            </div>
+            <?php if($_SESSION['role'] == 'teacher' || $_SESSION['role'] == 'admin'): ?>
+                <a href="new_request.php" class="btn btn-primary" style="width: auto; padding: 0.5rem 1rem;">+ แจ้งซ่อมใหม่</a>
+            <?php endif; ?>
         </div>
 
         <div class="stats-grid">
@@ -68,25 +65,23 @@ $requests = $repair->readAll();
         <div class="card-list">
             <?php if($requests->rowCount() > 0): ?>
                 <?php while ($row = $requests->fetch(PDO::FETCH_ASSOC)): ?>
-                    <a href="request_detail.php?id=<?= $row['id'] ?>" style="text-decoration: none; color: inherit;">
-                        <div class="list-item" style="transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;">
-                            <div class="item-desc">
-                                <div class="item-header">
-                                    <span class="req-no"><?= htmlspecialchars($row['request_no']) ?></span>
-                                    <span class="badge <?= $row['status'] ?>">
-                                        <?= strtoupper($row['status']) ?>
-                                    </span>
-                                </div>
-                                <div style="margin-top: 5px;">
-                                    <strong>ปัญหา:</strong> <?= htmlspecialchars($row['description']) ?>
-                                </div>
-                                <div style="font-size: 0.85rem; margin-top: 5px;">
-                                    📍 อาคาร <?= htmlspecialchars($row['building']) ?> ห้อง <?= htmlspecialchars($row['room']) ?> 
-                                    | 👤 ผู้แจ้ง: <?= htmlspecialchars($row['requester_name']) ?>
-                                </div>
+                    <div class="list-item">
+                        <div class="item-desc">
+                            <div class="item-header">
+                                <span class="req-no"><?= htmlspecialchars($row['request_no']) ?></span>
+                                <span class="badge <?= $row['status'] ?>">
+                                    <?= strtoupper($row['status']) ?>
+                                </span>
+                            </div>
+                            <div style="margin-top: 5px;">
+                                <strong>ปัญหา:</strong> <?= htmlspecialchars($row['description']) ?>
+                            </div>
+                            <div style="font-size: 0.85rem; margin-top: 5px;">
+                                📍 อาคาร <?= htmlspecialchars($row['building']) ?> ห้อง <?= htmlspecialchars($row['room']) ?> 
+                                | 👤 ผู้แจ้ง: <?= htmlspecialchars($row['requester_name']) ?>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 <?php endwhile; ?>
             <?php else: ?>
                 <div class="list-item" style="text-align: center; color: var(--text-muted);">

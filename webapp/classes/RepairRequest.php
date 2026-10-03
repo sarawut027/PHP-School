@@ -33,10 +33,9 @@ class RepairRequest {
 
     // อ่านรายการใบแจ้งซ่อมทั้งหมด (สำหรับ Dashboard)
     public function readAll() {
-        $query = "SELECT r.*, u.fullname as requester_name, t.fullname as technician_name 
+        $query = "SELECT r.*, u.fullname as requester_name 
                   FROM " . $this->table_name . " r
                   LEFT JOIN users u ON r.user_id = u.id
-                  LEFT JOIN users t ON r.assigned_to = t.id
                   ORDER BY r.created_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -94,57 +93,6 @@ class RepairRequest {
         } else {
             return sprintf("%s%03d", $prefix, 1);
         }
-    }
-
-    // มอบหมายงานให้ช่าง
-    public function assignTo($id, $technician_id, $due_date) {
-        $query = "UPDATE " . $this->table_name . " 
-                  SET assigned_to = :technician_id, due_date = :due_date, status = 'accepted' 
-                  WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':technician_id', $technician_id);
-        $stmt->bindParam(':due_date', $due_date);
-        $stmt->bindParam(':id', $id);
-        return $stmt->execute();
-    }
-
-    // อัปเดตสถานะงานซ่อม
-    public function updateStatus($id, $status, $cost = null, $result = null) {
-        $query = "UPDATE " . $this->table_name . " SET status = :status";
-        
-        if ($status === 'completed') {
-            $query .= ", cost = :cost, result = :result, completion_date = CURRENT_DATE";
-        }
-        
-        $query .= " WHERE id = :id";
-        
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':id', $id);
-        
-        if ($status === 'completed') {
-            $stmt->bindParam(':cost', $cost);
-            $stmt->bindParam(':result', $result);
-        }
-        
-        return $stmt->execute();
-    }
-
-    // ดึงรายชื่อช่างซ่อมทั้งหมด
-    public function getTechnicians() {
-        $query = "SELECT id, fullname FROM users WHERE role = 'technician'";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt;
-    }
-
-    // ดึงรูปภาพของใบแจ้งซ่อม
-    public function getImages($repair_id) {
-        $query = "SELECT * FROM repair_images WHERE repair_id = :repair_id ORDER BY uploaded_at ASC";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':repair_id', $repair_id);
-        $stmt->execute();
-        return $stmt;
     }
 }
 ?>

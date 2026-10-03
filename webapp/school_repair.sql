@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS comments (
 -- ข้อมูลจำลอง (Mock Data)
 -- รหัสผ่านคือ 1234 (hashed by password_hash)
 INSERT INTO users (username, password, fullname, role, email) VALUES
-('admin', '$2y$10$T3efHp.wuZXdtombgfqlEejr//F7r0JjoMZjyDTDOxSCgiA6S6Jyu', 'สมชาย ผู้ดูแล', 'admin', 'admin@school.ac.th'),
-('teacher1', '$2y$10$T3efHp.wuZXdtombgfqlEejr//F7r0JjoMZjyDTDOxSCgiA6S6Jyu', 'สมหญิง ครูประจำชั้น', 'teacher', 'teacher1@school.ac.th'),
-('tech1', '$2y$10$T3efHp.wuZXdtombgfqlEejr//F7r0JjoMZjyDTDOxSCgiA6S6Jyu', 'สมหมาย ช่างซ่อม', 'technician', 'tech1@school.ac.th')
+('admin', '$2y$10$w/V2uJ0nF.0hR3fFjRzUfeEw4eUuIqySxwN/w1yM8rJvO3z4T/bYW', 'สมชาย ผู้ดูแล', 'admin', 'admin@school.ac.th'),
+('teacher1', '$2y$10$w/V2uJ0nF.0hR3fFjRzUfeEw4eUuIqySxwN/w1yM8rJvO3z4T/bYW', 'สมหญิง ครูประจำชั้น', 'teacher', 'teacher1@school.ac.th'),
+('tech1', '$2y$10$w/V2uJ0nF.0hR3fFjRzUfeEw4eUuIqySxwN/w1yM8rJvO3z4T/bYW', 'สมหมาย ช่างซ่อม', 'technician', 'tech1@school.ac.th')
 ON DUPLICATE KEY UPDATE username=username;

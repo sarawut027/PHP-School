@@ -293,29 +293,3 @@ input[type="file"] {
         flex: 1;
     }
 }
-
-/* Print Styles */
-@media print {
-    body {
-        background-color: white;
-        color: black;
-    }
-    .navbar, .btn, .upload-area, .no-print {
-        display: none !important;
-    }
-    .container {
-        padding: 0;
-        max-width: 100%;
-        box-shadow: none;
-        border: none;
-    }
-    .stat-card {
-        border: 1px solid #ddd;
-        break-inside: avoid;
-    }
-    .badge {
-        border: 1px solid #333;
-        color: #333 !important;
-        background: white !important;
-    }
-}
